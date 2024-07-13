@@ -1,5 +1,5 @@
 # FlatlinerDOA.Controls.SelectingCanvas
-![](images/SelectingCanvasDemo.gif)
+![](https://raw.githubusercontent.com/FlatlinerDOA/FlatlinerDOA.Controls/main/images/SelectingCanvasDemo.gif)
 
 An Avalonia Control for visually selecting controls via a mouse drag selection box.
 
