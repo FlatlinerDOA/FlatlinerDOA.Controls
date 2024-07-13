@@ -1,5 +1,5 @@
 # Avalonia.Controls.SelectingCanvas
-![](images/screenshot.png)
+![](images/SelectingCanvasDemo.gif)
 
 Avalonia Control for visually selecting controls via a mouse drag selection box.
 
