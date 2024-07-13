@@ -21,5 +21,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.10" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
