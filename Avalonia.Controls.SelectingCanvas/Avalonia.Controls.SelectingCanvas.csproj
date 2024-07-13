@@ -4,6 +4,18 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageId>Avalonia.Controls.SelectingCanvas</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>©️ 2024 Andrew Chisholm</Copyright>
+    <PackageProjectUrl>https://github.com/FlatlinerDOA/Avalonia.Controls.SelectingCanvas</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FlatlinerDOA/Avalonia.Controls.SelectingCanvas.git</RepositoryUrl>
+    <Version>1.0.0</Version>
+    <Authors>Andrew Chisholm</Authors>
+    <Description>
+      Unofficial Avalonia Control for performing a mouse-draggable selection box.
+    </Description>
+     <PackageTags>Avalonia;Selection;Box;Canvas;Drag;Xaml;Managed;C#"</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
