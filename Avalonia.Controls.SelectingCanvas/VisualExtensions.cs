@@ -8,17 +8,11 @@ internal static class VisualExtensions
 
     public static Rect TransformBounds(this Rect rect, Matrix transform)
     {
-        // Get the four corners of the Rect
-        var topLeft = new Point(rect.X, rect.Y);
-        var topRight = new Point(rect.X + rect.Width, rect.Y);
-        var bottomLeft = new Point(rect.X, rect.Y + rect.Height);
-        var bottomRight = new Point(rect.X + rect.Width, rect.Y + rect.Height);
-
         // Transform the corners using the specified matrix
-        var transformedTopLeft = transform.Transform(topLeft);
-        var transformedTopRight = transform.Transform(topRight);
-        var transformedBottomLeft = transform.Transform(bottomLeft);
-        var transformedBottomRight = transform.Transform(bottomRight);
+        var transformedTopLeft = transform.Transform(rect.TopLeft);
+        var transformedTopRight = transform.Transform(rect.TopRight);
+        var transformedBottomLeft = transform.Transform(rect.BottomLeft);
+        var transformedBottomRight = transform.Transform(rect.BottomRight);
 
         // Find the minimum and maximum coordinates of the transformed corners
         var minX = Math.Min(Math.Min(transformedTopLeft.X, transformedTopRight.X),
