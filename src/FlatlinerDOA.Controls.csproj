@@ -5,17 +5,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageId>Avalonia.Controls.SelectingCanvas</PackageId>
+    <PackageId>FlatlinerDOA.Controls</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>©️ 2024 Andrew Chisholm</Copyright>
-    <PackageProjectUrl>https://github.com/FlatlinerDOA/Avalonia.Controls.SelectingCanvas</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/FlatlinerDOA/Avalonia.Controls.SelectingCanvas.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/FlatlinerDOA/FlatlinerDOA.Controls</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FlatlinerDOA/FlatlinerDOA.Controls.git</RepositoryUrl>
     <Version>1.0.0</Version>
     <Authors>Andrew Chisholm</Authors>
     <Description>
-      Unofficial Avalonia Control for performing a mouse-draggable selection box.
+      An Avalonia Control for performing a mouse-draggable selection box.
     </Description>
-     <PackageTags>Avalonia;Selection;Box;Canvas;Drag;Xaml;Managed;C#"</PackageTags>
+     <PackageTags>Avalonia;Controls;Selection;SelectBox;Canvas;Drag;Xaml;Managed;C#"</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

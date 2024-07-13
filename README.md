@@ -1,7 +1,7 @@
-# Avalonia.Controls.SelectingCanvas
+# FlatlinerDOA.Controls.SelectingCanvas
 ![](images/SelectingCanvasDemo.gif)
 
-Avalonia Control for visually selecting controls via a mouse drag selection box.
+An Avalonia Control for visually selecting controls via a mouse drag selection box.
 
 ## Requirements
 * .NET 8.0
@@ -17,8 +17,8 @@ Avalonia Control for visually selecting controls via a mouse drag selection box.
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
         xmlns:fd="https://github.com/FlatlinerDOA"
-        x:Class="Avalonia.Controls.SelectingCanvas.Demo.MainWindow"
-        xmlns:vm="using:Avalonia.Controls.SelectingCanvas.Demo"
+        x:Class="FlatlinerDOA.Controls.Demo.MainWindow"
+        xmlns:vm="using:FlatlinerDOA.Controls.Demo"
         x:DataType="vm:MainViewModel"
         Title="SelectingCanvas Demo">
      <Window.Styles>

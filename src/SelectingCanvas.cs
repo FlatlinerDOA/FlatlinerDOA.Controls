@@ -1,8 +1,9 @@
-﻿namespace Avalonia.Controls.SelectingCanvas;
+﻿namespace FlatlinerDOA.Controls;
 
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
@@ -21,7 +22,7 @@ public class SelectingCanvas : Canvas
         AvaloniaProperty.Register<SelectingCanvas, double>(nameof(SelectionStrokeThickness), 1.0d);
 
     public static readonly AttachedProperty<bool> IsSelectedProperty =
-        AvaloniaProperty.RegisterAttached<SelectingCanvas, Control, bool>("IsSelected", false, defaultBindingMode: Data.BindingMode.TwoWay);
+        AvaloniaProperty.RegisterAttached<SelectingCanvas, Control, bool>("IsSelected", false, defaultBindingMode: BindingMode.TwoWay);
 
     public static readonly AttachedProperty<bool> IsSelectableProperty =
         AvaloniaProperty.RegisterAttached<SelectingCanvas, Control, bool>("IsSelectable", true);

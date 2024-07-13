@@ -1,5 +1,6 @@
-﻿namespace Avalonia.Controls.SelectingCanvas;
+﻿namespace FlatlinerDOA.Controls;
 
+using Avalonia;
 using System;
 
 internal static class VisualExtensions

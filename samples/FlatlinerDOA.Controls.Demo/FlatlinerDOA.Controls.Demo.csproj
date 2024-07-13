@@ -18,6 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.Controls.SelectingCanvas\Avalonia.Controls.SelectingCanvas.csproj" />
+    <ProjectReference Include="..\..\src\FlatlinerDOA.Controls.csproj" />
   </ItemGroup>
 </Project>
