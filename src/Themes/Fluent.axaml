@@ -1,0 +1,216 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:fd="https://github.com/FlatlinerDOA"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <fd:VirtualizingGrid />
+  </Design.PreviewWith>
+
+  <Style Selector="fd|VirtualizingGrid">
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
+
+          <!--<ScrollViewer Name="PART_ColumnHeadersScrollViewer"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Disabled"
+                        Grid.Column="1"
+                        Grid.Row="0">
+            <ColumnHeadersPresenter Name="PART_ColumnHeadersItemsRepeater"
+                                    ItemsSource="{TemplateBinding Columns}"
+                                    Tag="{TemplateBinding}"
+                                    ClipToBounds="False">
+              <ColumnHeadersPresenter.Layout>
+                <UniformGridLayout MaximumRowsOrColumns="1" Orientation="Vertical" />
+              </ColumnHeadersPresenter.Layout>
+              <ColumnHeadersPresenter.ItemTemplate>
+                <DataTemplate DataType="Column">
+                  <ColumnHeader Width="{Binding Width}"
+                                Height="{Binding #PART_ColumnHeadersItemsRepeater.Tag.ColumnHeadersHeight}">
+                    <TextBlock Text="{Binding Header}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                  </ColumnHeader>
+                </DataTemplate>
+              </ColumnHeadersPresenter.ItemTemplate>
+            </ColumnHeadersPresenter>
+          </ScrollViewer>-->
+
+          <!--<RowHeadersPresenter Name="PART_RowHeadersItemsRepeater"
+                               ItemsSource="{TemplateBinding Rows}"
+                               Tag="{TemplateBinding}"
+                               Grid.Column="0"
+                               Grid.Row="1">
+            <RowHeadersPresenter.ItemsPanel>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel Orientation="Vertical" />
+              </ItemsPanelTemplate>
+            </RowHeadersPresenter.ItemsPanel>
+            <RowHeadersPresenter.ItemTemplate>
+              <DataTemplate DataType="Row">
+                <RowHeader Width="{Binding #PART_RowHeadersItemsRepeater.Tag.RowHeadersWidth}"
+                           Height="{Binding Height}">
+                  <TextBlock Text="{Binding Header}"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center" />
+                </RowHeader>
+              </DataTemplate>
+            </RowHeadersPresenter.ItemTemplate>
+          </RowHeadersPresenter>-->
+
+          <fd:RowsPresenter Name="PART_RowsItemsRepeater"
+                         ItemsSource="{TemplateBinding Rows}"
+                         Tag="{TemplateBinding}"
+                         Grid.Column="1"
+                         Grid.Row="1">
+            <fd:RowsPresenter.ItemsPanel>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel Orientation="Vertical" />
+              </ItemsPanelTemplate>
+            </fd:RowsPresenter.ItemsPanel>
+            <fd:RowsPresenter.ItemTemplate>
+              <DataTemplate DataType="fd:Row">
+                <fd:CellsPresenter Name="PART_CellsItemsRepeater"
+                                ItemsSource="{Binding #PART_RowsItemsRepeater.Tag.Columns}"
+                                Height="{Binding Height}"
+                                ClipToBounds="False">
+                  <fd:CellsPresenter.Layout>
+                    <UniformGridLayout MaximumRowsOrColumns="1" Orientation="Vertical" />
+                  </fd:CellsPresenter.Layout>
+                  <fd:CellsPresenter.ItemTemplate>
+                    <DataTemplate DataType="fd:Column">
+                      <fd:Cell Width="{Binding Width}"
+                            Height="{Binding #PART_CellsItemsRepeater.Bounds.Height}">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="{DynamicResource FontSizeSmall}">
+                          <TextBlock.Text>
+                            <MultiBinding Converter="{x:Static fd:CellDataConverter.Instance}">
+                              <Binding Path="#PART_RowsItemsRepeater.Tag.Items" />
+                              <Binding Path="Index" />
+                              <Binding Path="DataContext.Index" ElementName="PART_CellsItemsRepeater" />
+                            </MultiBinding>
+                          </TextBlock.Text>
+                        </TextBlock>
+                      </fd:Cell>
+                    </DataTemplate>
+                  </fd:CellsPresenter.ItemTemplate>
+                </fd:CellsPresenter>
+              </DataTemplate>
+            </fd:RowsPresenter.ItemTemplate>
+          </fd:RowsPresenter>
+
+        </Grid>
+
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <!--<Style Selector="fd|RowHeadersPresenter">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    --><!-- <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" /> --><!--
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ListBoxBorderThemeThickness}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <ScrollViewer Name="PART_ScrollViewer"
+                        HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                        VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                        AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
+            <ItemsPresenter Name="PART_ItemsPresenter"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            Margin="{TemplateBinding Padding}" />
+          </ScrollViewer>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>-->
+
+  <Style Selector="fd|RowsPresenter">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    <!-- <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" /> -->
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ListBoxBorderThemeThickness}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <ScrollViewer Name="PART_ScrollViewer"
+                        HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                        VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                        AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
+            <ItemsPresenter Name="PART_ItemsPresenter"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            Margin="{TemplateBinding Padding}" />
+          </ScrollViewer>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <!--<Style Selector="RowHeadersPresenter > ListBoxItem">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+  <Style Selector="RowHeadersPresenter > ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="RowHeadersPresenter > ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="RowHeadersPresenter > ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="RowHeadersPresenter > ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="RowHeadersPresenter > ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="RowHeadersPresenter > ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>-->
+
+  <Style Selector="fd|RowsPresenter > ListBoxItem">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="0" />
+  </Style>
+  <Style Selector="fd|RowsPresenter > ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="fd|RowsPresenter > ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="fd|RowsPresenter > ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="fd|RowsPresenter > ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="fd|RowsPresenter > ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="fd|RowsPresenter > ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+
+</Styles>

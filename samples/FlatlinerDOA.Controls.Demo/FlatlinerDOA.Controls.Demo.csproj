@@ -20,4 +20,14 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\FlatlinerDOA.Controls.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="VirtualizingWrapPanelDemo.axaml.cs">
+      <DependentUpon>VirtualizingWrapPanelDemo.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="InkCanvasDemo.axaml" />
+  </ItemGroup>
 </Project>

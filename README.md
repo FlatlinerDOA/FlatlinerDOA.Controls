@@ -1,27 +1,44 @@
-# FlatlinerDOA.Controls.SelectingCanvas
-![](https://raw.githubusercontent.com/FlatlinerDOA/FlatlinerDOA.Controls/main/images/SelectingCanvasDemo.gif)
-
-An Avalonia Control for visually selecting controls via a mouse drag selection box.
-
+# FlatlinerDOA.Controls
 ## Requirements
 * .NET 8.0
 * Avalonia 11.0.10 or later
 
-## Using SelectingCanvas
+## SelectingCanvas
 
-`MainWindow.xaml`
+![](https://raw.githubusercontent.com/FlatlinerDOA/FlatlinerDOA.Controls/main/images/SelectingCanvasDemo.gif)
+
+
+A control for visually selecting descendant controls via a mouse drag selection box.
+
+1. Add `xmlns:fd="https://github.com/FlatlinerDOA"` to your Xaml file
+1. Define a `<fd:SelectingCanvas>` control
+1. Add any selectable children to your control, or use the`<fd:SelectingCanvas>` in an `<ItemsPanelTemplate>` if you intend to data-bind your selectable items
+1. To visually show what is and isn't selected use a style selector for your elements such as the following:
+
+```
+  <Style Selector="Rectangle[(fd|SelectingCanvas.IsSelectable)=False]">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+    <Style Selector="Rectangle[(fd|SelectingCanvas.IsSelected)=True]">
+      <Setter Property="Stroke" Value="Blue" />
+    </Style>
+ ```
+
+### Example
+
+
+`SelectingCanvasDemo.axaml`
 ```XAML
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
-        xmlns:fd="https://github.com/FlatlinerDOA"
-        x:Class="FlatlinerDOA.Controls.Demo.MainWindow"
-        xmlns:vm="using:FlatlinerDOA.Controls.Demo"
-        x:DataType="vm:MainViewModel"
-        Title="SelectingCanvas Demo">
-     <Window.Styles>
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="1024"
+             xmlns:fd="https://github.com/FlatlinerDOA"
+             xmlns:vm="using:FlatlinerDOA.Controls.Demo"
+             x:DataType="vm:MainViewModel"
+             x:Class="FlatlinerDOA.Controls.Demo.SelectingCanvasDemo">
+  <UserControl.Styles>
     <Style Selector="Canvas">
       <Setter Property="Background" Value="Gray" />
     </Style>
@@ -39,7 +56,7 @@ An Avalonia Control for visually selecting controls via a mouse drag selection b
     <Style Selector="Rectangle[(fd|SelectingCanvas.IsSelected)=True]">
       <Setter Property="Stroke" Value="Blue" />
     </Style>
-  </Window.Styles>
+  </UserControl.Styles>
   <Grid RowDefinitions="Auto,*">
     <StackPanel Orientation="Vertical"
                 Margin="40"
@@ -51,9 +68,9 @@ An Avalonia Control for visually selecting controls via a mouse drag selection b
       <TextBlock Text="NOTE: Selection is recursive all descendants inside selection area will be selected." TextWrapping="Wrap"/>
       <CheckBox IsChecked="{Binding IsChildRectangleSelected}">Binding: MainViewModel.IsChildRectangleSelected</CheckBox>
     </StackPanel>
-    <fd:SelectingCanvas 
+    <fd:SelectingCanvas
       Grid.Row="1"
-      Background="LightGray" 
+      Background="LightGray"
       Width="500" Height="500"
       SelectionFill="#336495ed"
       SelectionStroke="CornflowerBlue"
@@ -72,8 +89,26 @@ An Avalonia Control for visually selecting controls via a mouse drag selection b
       </Canvas>
     </fd:SelectingCanvas>
   </Grid>
-</Window>
+</UserControl>
 ```
+
+## InkCanvas
+
+A natural feeling pen experience, useful for collecting signatures or as a nice drawing tool.
+
+![](https://raw.githubusercontent.com/FlatlinerDOA/FlatlinerDOA.Controls/main/images/InkCanvasDemo.gif)
+
+
+1. Add `xmlns:fd="https://github.com/FlatlinerDOA"` to your Xaml file
+1. Define a `<fd:InkCanvas>` control
+1. To clear currently you must currently call the `Children.Clear()`, I hope to improve this in future.
+1. Not supported yet, exporting of path data or the canvas as an image (PR's welcome).
+
+## VirtualizingWrapPanel
+
+A virtualizing layout control for laying out a series of tiles of uniform width horizontally or uniform height vertically.
+
+This is a work in progress.
 
 ## License
 

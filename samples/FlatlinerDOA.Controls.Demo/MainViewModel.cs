@@ -1,9 +1,18 @@
 ﻿namespace FlatlinerDOA.Controls.Demo;
 
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 public class MainViewModel : INotifyPropertyChanged
 {
+
+    public MainViewModel()
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            this.Items.Add(i.ToString());
+        }
+    }
     private bool isChildRectangleSelected;
 
     public bool IsChildRectangleSelected
@@ -23,4 +32,6 @@ public class MainViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    public ObservableCollection<string> Items { get; init; } = new();
 }

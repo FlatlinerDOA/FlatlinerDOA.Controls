@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fd="https://github.com/FlatlinerDOA"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="750"
+             
+             x:Class="FlatlinerDOA.Controls.Demo.InkCanvasDemo">
+  <Grid RowDefinitions="Auto,*"
+      Background="LightGray">
+    <StackPanel Orientation="Vertical"
+                Margin="40"
+                HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1">
+      <TextBlock Text="Mouse, Touch or Pen Down - Start Inking!"/>
+      <TextBlock Text="Mouse, Touch or Pen Up - Stop Inking"/>
+      <Grid ColumnDefinitions="*,*" Margin="10">
+        <Button Click="SaveSvgClick">Save SVG</Button>
+        <Button Grid.Column="1" Click="ClearClick">Clear</Button>
+      </Grid>
+    </StackPanel>
+    <fd:InkCanvas
+      Grid.Row="1"
+      Width="500" Height="500"
+      Margin="20"
+      Background="White"
+      PenBrush="CornflowerBlue">
+    </fd:InkCanvas>
+  </Grid>
+</UserControl>
