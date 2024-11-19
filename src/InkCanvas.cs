@@ -31,14 +31,14 @@ public class InkCanvas : Canvas
     /// MinimumInkWidth StyledProperty definition
     /// </summary>
     public static readonly StyledProperty<double> MinimumInkWidthProperty =
-        AvaloniaProperty.Register<InkCanvas, double>(nameof(MinimumInkWidth), 0.7d);
+        AvaloniaProperty.Register<InkCanvas, double>(nameof(MinimumInkWidth), 0.5d);
    
 
     /// <summary>
     /// MaximumInkWidth StyledProperty definition
     /// </summary>
     public static readonly StyledProperty<double> MaximumInkWidthProperty =
-        AvaloniaProperty.Register<InkCanvas, double>(nameof(MaximumInkWidth), 1.8d);
+        AvaloniaProperty.Register<InkCanvas, double>(nameof(MaximumInkWidth), 2.5d);
   
 
 
@@ -59,13 +59,13 @@ public class InkCanvas : Canvas
     /// VelocityFilterWeight StyledProperty definition
     /// </summary>
     public static readonly StyledProperty<double> VelocityFilterWeightProperty =
-        AvaloniaProperty.Register<InkCanvas, double>(nameof(VelocityFilterWeight), 2.1d);
+        AvaloniaProperty.Register<InkCanvas, double>(nameof(VelocityFilterWeight), 0.7d);
     
     /// <summary>
     /// Throttle StyledProperty definition
     /// </summary>
     public static readonly StyledProperty<int> ThrottleProperty =
-        AvaloniaProperty.Register<InkCanvas, int>(nameof(Throttle), 8);
+        AvaloniaProperty.Register<InkCanvas, int>(nameof(Throttle), 16);
 
 
     // Private stuff
