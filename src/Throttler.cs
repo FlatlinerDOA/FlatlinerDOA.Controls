@@ -36,7 +36,7 @@ public static class Throttler
             {
                 try
                 {
-                    await Task.Delay(delay, token);
+                    await Task.Delay(delay, token).ConfigureAwait(false);
                     lock (lockObject)
                     {
                         if (!token.IsCancellationRequested)

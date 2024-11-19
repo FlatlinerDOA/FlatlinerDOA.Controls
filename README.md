@@ -102,7 +102,7 @@ A natural feeling pen experience, useful for collecting signatures or as a nice 
 1. Add `xmlns:fd="https://github.com/FlatlinerDOA"` to your Xaml file
 1. Define a `<fd:InkCanvas>` control
 1. To clear currently you must currently call the `Children.Clear()`, I hope to improve this in future.
-1. Not supported yet, exporting of path data or the canvas as an image (PR's welcome).
+1. To export the ink to an SVG `XElement` call this.FindDescendantOfType<InkCanvas>().ToSVG() which you can then save to a file.
 
 ## VirtualizingWrapPanel
 

@@ -1,4 +1,8 @@
-﻿namespace FlatlinerDOA.Controls;
+﻿using System.Collections.Concurrent;
+using Avalonia.Interactivity;
+using Avalonia.Threading;
+
+namespace FlatlinerDOA.Controls;
 
 using Avalonia;
 using Avalonia.Controls;
@@ -46,7 +50,7 @@ public class InkCanvas : Canvas
     /// MinimumInkDistance StyledProperty definition
     /// </summary>
     public static readonly StyledProperty<double> MinimumInkDistanceProperty =
-        AvaloniaProperty.Register<InkCanvas, double>(nameof(MinimumInkDistance), 5d);
+        AvaloniaProperty.Register<InkCanvas, double>(nameof(MinimumInkDistance), 3d);
     
     /// <summary>
     /// PenBrush StyledProperty definition
@@ -67,14 +71,29 @@ public class InkCanvas : Canvas
     public static readonly StyledProperty<int> ThrottleProperty =
         AvaloniaProperty.Register<InkCanvas, int>(nameof(Throttle), 16);
 
+    public static readonly RoutedEvent<StrokeEndedEventArgs> StrokeEndedEvent =
+        RoutedEvent.Register<InkCanvas, StrokeEndedEventArgs>(
+            nameof(StrokeEnded),
+            RoutingStrategies.Bubble);
 
+    public event EventHandler<StrokeEndedEventArgs> StrokeEnded
+    {
+        add => AddHandler(StrokeEndedEvent, value);
+        remove => RemoveHandler(StrokeEndedEvent, value);
+    }
+
+    protected virtual void OnStrokeEnded(StrokeEndedEventArgs args)
+    {
+        this.RaiseEvent(args);
+    }
+    
     // Private stuff
     private bool _drawingStroke = false;
     private bool _isEmpty = true;
 
 
     // Stores up to 4 most recent points; used to generate a new curve
-    private record class LastState
+    private class LastState
     {
         public LastState()
         {
@@ -148,12 +167,41 @@ public class InkCanvas : Canvas
     ////private double _lastVelocity = 0;
     ////private double _lastWidth = 0;
 
-    private Action<InkPointerEvent> StrokeMoveUpdate;
+    ////private Action<InkPointerEvent> StrokeMoveUpdate;
 
+    private readonly DispatcherTimer inputTimer;
+    private readonly ConcurrentQueue<InkPointerEvent> pointBuffer = new();
     public InkCanvas()
     {
-        this.StrokeMoveUpdate = Throttler.Create<InkPointerEvent>(this.StrokeUpdate, TimeSpan.FromMilliseconds(this.Throttle));
+        this.inputTimer = new DispatcherTimer
+        {
+             Interval = TimeSpan.FromMilliseconds(this.Throttle) // ~60 FPS
+        };
+        this.inputTimer.Tick += (sender, args) =>
+        {
+            this.inputTimer.Stop();
+            while (this.pointBuffer.TryDequeue(out var point))
+            {
+                this.StrokeUpdate(point);
+            }
+        };
+        // this.inputTimer.Start();
+        //this.StrokeMoveUpdate = Throttler.Create<InkPointerEvent>(this.StrokeUpdate, TimeSpan.FromMilliseconds(this.Throttle));
         this.ClipToBounds = true;
+    }
+
+    private void StrokeMoveUpdate(InkPointerEvent e)
+    {
+        while (this.pointBuffer.Count > 4) // Max points per frame.
+        {
+            this.pointBuffer.TryDequeue(out _);
+        }
+        
+        this.pointBuffer.Enqueue(e);
+        if (!this.inputTimer.IsEnabled)
+        {
+            this.inputTimer.Start();
+        }
     }
 
     /// <summary>
@@ -326,7 +374,7 @@ public class InkCanvas : Canvas
         var pointGroupOptions = this.GetPointGroupOptions(lastPointGroup);
 
         // Skip this point if it's too close to the previous one
-        if (lastPoint is null || !(lastPoint is not null && isLastPointTooClose))
+        if (lastPoint is null || !isLastPointTooClose)
         {
             var curve = this._last.AddPoint(point, pointGroupOptions);
 
@@ -360,12 +408,7 @@ public class InkCanvas : Canvas
         }
 
         this._drawingStroke = false;
-
-        //var endStrokeEvent = new RoutedEventArgs(
-        //    new RoutedEvent("EndStroke", RoutingStrategies.Bubble, typeof(RoutedEventArgs))
-        //);
-
-        //this.RaiseEvent(endStrokeEvent);
+        this.OnStrokeEnded(new StrokeEndedEventArgs(StrokeEndedEvent, this._last.Points));
     }
 
     private InkPointGroupOptions GetPointGroupOptions(InkPointGroup? group = null) => new()
@@ -656,5 +699,17 @@ public class InkCanvas : Canvas
         return only
             ? pointProps.IsLeftButtonPressed && !pointProps.IsRightButtonPressed && !pointProps.IsBarrelButtonPressed && !pointProps.IsXButton1Pressed && !pointProps.IsXButton2Pressed
             : pointProps.IsLeftButtonPressed;
+    }
+    
+    
+    public class StrokeEndedEventArgs : RoutedEventArgs
+    {
+        public IReadOnlyList<InkPoint> Points { get; }
+
+        public StrokeEndedEventArgs(RoutedEvent routedEvent, IReadOnlyList<InkPoint> points) 
+            : base(routedEvent)
+        {
+            Points = points;
+        }
     }
 }
