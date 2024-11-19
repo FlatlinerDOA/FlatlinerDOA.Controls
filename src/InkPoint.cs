@@ -5,10 +5,10 @@ public record class InkPoint
 {
     public double X { get; }
     public double Y { get; }
-    public float Pressure { get; }
-    public long Time { get; }
+    public double Pressure { get; }
+    public DateTime Time { get; }
 
-    public InkPoint(double x, double y, float? pressure = null, long? time = null)
+    public InkPoint(double x, double y, double? pressure = null, DateTime? time = null)
     {
         if (double.IsNaN(x) || double.IsNaN(y))
         {
@@ -18,12 +18,12 @@ public record class InkPoint
         this.X = +x;
         this.Y = +y;
         this.Pressure = pressure ?? 0f;
-        this.Time = time ?? DateTimeOffset.UtcNow.Ticks;
+        this.Time = time ?? DateTime.UtcNow;
     }
 
-    public float DistanceTo(InkPoint start) =>
+    public double DistanceTo(InkPoint start) =>
         (float)Math.Sqrt(Math.Pow(this.X - start.X, 2) + Math.Pow(this.Y - start.Y, 2));
 
-    public float VelocityFrom(InkPoint start) =>
-        this.Time != start.Time ? this.DistanceTo(start) / (this.Time - start.Time) : 0;
+    public double VelocityFrom(InkPoint start) =>
+        this.Time != start.Time ? this.DistanceTo(start) / (this.Time - start.Time).TotalMilliseconds : 0;
 }
